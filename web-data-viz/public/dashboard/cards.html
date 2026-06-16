@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
+    <title>Lightness Photo</title>
 
-
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="stylesheet" href="../css/dashboards.css" />
+    <!-- <link rel="stylesheet" href="../css/estilo.css" /> -->
+    <link rel="stylesheet" href="../css/foto.css" />
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
@@ -26,26 +26,10 @@
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>Lightness Photo</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav">
-                <h3>Aquários e Terrários</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
             </div>
 
             <div class="btn-logout" onclick="limparSessao()">
@@ -54,66 +38,103 @@
 
         </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
-                </div>
+        <div class="container">
+
+            <h1>Capture sua Foto</h1>
+
+            <video id="video" autoplay></video>
+
+            <button onclick="tirarFoto()">Capturar foto</button>
+
+            <canvas id="canvas"></canvas>
+
+            <div id="polaroid" class="polaroid">
+                <img id="fotoFinal">
+                <p></p>
             </div>
 
-            <div class="cards" id="cardAquarios">
-
-            </div>
-
+            <button onclick="baixarPolaroid()">
+                Baixar Polaroid
+            </button>
         </div>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    </div>
+
+    </div>
 
     </div>
 
 </body>
 
 <script>
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const fotoFinal = document.getElementById("fotoFinal");
+    const polaroid = document.getElementById("polaroid");
+    let imagemCapturada = "";
 
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
+    // Liga webcam
+    navigator.mediaDevices.getUserMedia({
+        video: true
+    })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(erro => {
+            alert("Erro ao acessar câmera");
+            console.log(erro);
         });
+
+    function tirarFoto() {
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        imagemCapturada = canvas.toDataURL("image/png");
+
+        fotoFinal.src = imagemCapturada;
+
+        polaroid.style.display = "block";
+
+        fotoFinal.classList.remove("revelando");
+
+        void fotoFinal.offsetWidth;
+
+        fotoFinal.classList.add("revelando");
     }
+
+    async function baixarPolaroid() {
+
+        const polaroid = document.getElementById("polaroid");
+
+        const rotacaoOriginal = polaroid.style.transform;
+
+        polaroid.style.transform = "none";
+
+        const canvas = await html2canvas(polaroid);
+
+        polaroid.style.transform = rotacaoOriginal;
+
+        const link = document.createElement("a");
+
+        link.download = "polaroid.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    }
+
+
+
 
 </script>
 
