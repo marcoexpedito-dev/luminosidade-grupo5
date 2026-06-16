@@ -23,7 +23,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #8f5f17;
+  border-bottom: 2px solid #666666;
 }
 
 .header .container {
@@ -34,7 +34,8 @@ body {
 
 .header a {
   text-decoration: none;
-  color: #8f5f17;
+  color: white;
+  text-align: center;
 }
 
 .agora {
@@ -47,11 +48,11 @@ body {
   align-items: center;
   justify-content: space-between;
   list-style: none;
-  color: #8f5f17;
+  color: white;
 }
 
 .titulo {
-  color: #8f5f17;
+  color: white;
   width: fit-content;
   font-weight: 500;
 }
@@ -60,88 +61,12 @@ body {
   margin: 0;
 }
 
-/* BANNER */
-
-.banner {
-  height: var(--tamanho-banner);
-  color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
-  background-size: cover;
-}
-
-.banner .container {
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.banner .container p {
-  width: 50%;
-  margin: 0;
-  padding: 0;
-  font-size: 36px;
-}
-
-.banner .container span {
-  font-weight: 800;
-}
-
-/* MISSÃO VISÃO VALORES */
-
-.social {
-  background-color: #e5e5e5;
-  display: flex;
-}
-
-.social .container {
-  justify-content: center;
-}
-
-.box img {
-  width: 170px;
-}
-
-.social .container .boxes {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 30px 0;
-}
-
-.social p {
-  text-align: center;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* FOOTER */
-
-.footer {
-  background-color: #000000;
-  height: 150px;
-  color: #8f5f17;
-  display: flex;
-  font-size: 15px;
-}
-
-.footer .container {
-  justify-content: center;
-  text-align: center;
-}
-
-.footer .container .version {
-  font-size: 12px;
-}
-
-/* LOGIN */
-
 .login {
   height: var(--tamanho-login);
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.418), rgba(0, 0, 0, 0.308)), 
+  url('../assets/imgs/fotinha_login.png');
+  
+
   background-size: cover;
 }
 
@@ -152,20 +77,21 @@ body {
 }
 
 .card {
-  width: 50%;
+  width: 30%;
   background-color: #e5e5e5;
-  border-radius: 10px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: palevioletred;
+  color: black;
   flex-direction: column;
   height: fit-content;
-  padding: 20px 0;
+  padding: 50px 0;
+  margin-top: -100px;
 }
 
 .card h2 {
-  margin: 0;
+  margin-top: 0;
   font-size: 30px;
 }
 
@@ -183,14 +109,15 @@ body {
 }
 
 .formulario input {
-  border: 2px solid #32b9cd;
+  border: 2px solid #666666;
   text-align: center;
   border-radius: 10px;
   margin: 0;
+  margin-top: 10px;
 }
 
 .formulario select {
-  border: 2px solid #32b9cd;
+  border: 2px solid #666666;
   background-color: white;
   color: gray;
   height: 36px;
@@ -210,15 +137,15 @@ body {
   cursor: pointer;
   font-family: "Barlow", sans-serif;
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 18px;
   color: #fff;
-  background-color: #ED145B;
+  background-color: gray;
   width: 120px;
-  height: 30px;
+  height: 45px;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .loading-div {
@@ -300,63 +227,4 @@ input {
 .loading-div img {
   height: 50px;
   width: 50px;
-}
-
-/* SIMULADOR */
-
-.simulador {
-  color: white;
-}
-
-.simulador .container {
-  flex-direction: column;
-  overflow: scroll; 
-  height: var(--tamanho-simulador);
-}
-
-/* ALERTA */
-
-#alerta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.mensagem-alarme {
-  background-color: white;
-  border-radius: 5px;
-  width: 300px;
-  height: 80px;
-  margin: 10px;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.mensagem-alarme h3 {
-  font-size: 14px;
-  margin: 0;
-}
-
-.mensagem-alarme .informacao {
-  width: 66%;
-}
-
-.alarme-sino {
-  width: 48px;
-  height: 48px;
-  animation-name: bell;
-  animation-duration: 4s;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
-  background-size: cover;
-  animation-iteration-count: infinite;
-}
-
-@keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
 }
